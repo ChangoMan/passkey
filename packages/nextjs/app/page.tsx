@@ -2,7 +2,7 @@
 
 import { client } from "./client";
 import type { NextPage } from "next";
-import { base, baseSepolia, ethereum } from "thirdweb/chains";
+import { base, baseSepolia, ethereum, optimism } from "thirdweb/chains";
 import { ConnectButton, PayEmbed, useActiveAccount } from "thirdweb/react";
 import { createWallet, inAppWallet } from "thirdweb/wallets";
 import { Address } from "~~/components/scaffold-eth";
@@ -28,7 +28,8 @@ const Home: NextPage = () => {
             <ConnectButton
               client={client}
               wallets={wallets}
-              chains={[base, baseSepolia, ethereum]}
+              chain={base}
+              chains={[base, baseSepolia, optimism, ethereum]}
               connectModal={{
                 size: "compact",
                 showThirdwebBranding: false,

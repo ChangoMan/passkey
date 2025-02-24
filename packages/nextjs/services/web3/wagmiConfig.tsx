@@ -1,7 +1,8 @@
-import { wagmiConnectors } from "./wagmiConnectors";
+import { inAppWalletConnector } from "@thirdweb-dev/wagmi-adapter";
 import { Chain, createClient, fallback, http } from "viem";
 import { hardhat, mainnet } from "viem/chains";
 import { createConfig } from "wagmi";
+import { client } from "~~/app/client";
 import scaffoldConfig, { DEFAULT_ALCHEMY_API_KEY } from "~~/scaffold.config";
 import { getAlchemyHttpUrl } from "~~/utils/scaffold-eth";
 
@@ -14,7 +15,15 @@ export const enabledChains = targetNetworks.find((network: Chain) => network.id 
 
 export const wagmiConfig = createConfig({
   chains: enabledChains,
-  connectors: wagmiConnectors,
+  connectors: [
+    // add the in-app wallet connector
+    inAppWalletConnector({
+      client,
+      auth: {
+        options: ["passkey"],
+      },
+    }),
+  ],
   ssr: true,
   client({ chain }) {
     let rpcFallbacks = [http()];

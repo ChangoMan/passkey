@@ -28,7 +28,6 @@ const Home: NextPage = () => {
             <ConnectButton
               client={client}
               wallets={wallets}
-              chain={base}
               chains={[base, baseSepolia, optimism, ethereum]}
               connectModal={{
                 size: "compact",
